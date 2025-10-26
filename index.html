@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>My Own time</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@300;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Single optimized canvas for starfield -->
+<canvas id="stars"></canvas>
+
+<div class="app" role="main">
+  <div class="center">
+    <div class="glow" aria-hidden="true"></div>
+
+    <!-- Clock Display -->
+    <div class="clock-wrap" id="clock-display" aria-label="Digital flip clock">
+      <!-- Hours -->
+      <div class="flip-unit" id="unit-hours">
+        <div class="flip" data-unit="hours">
+          <div class="card-face card-front"><div class="digits" data-side="front">00</div></div>
+          <div class="card-face card-back"><div class="digits" data-side="back">00</div></div>
+        </div>
+        <div class="unit-label"> </div>
+        
+        <!-- AM/PM Indicator -->
+        <div class="ampm-indicator" id="ampm"> </div>
+      </div>
+
+      <div class="colon">:</div>
+
+      <!-- Minutes -->
+      <div class="flip-unit" id="unit-mins">
+        <div class="flip" data-unit="mins">
+          <div class="card-face card-front"><div class="digits" data-side="front">00</div></div>
+          <div class="card-face card-back"><div class="digits" data-side="back">00</div></div>
+        </div>
+        <div class="unit-label"> </div>
+      </div>
+    </div>
+
+    <!-- Pomodoro Timer Display -->
+    <div class="pomodoro-wrap" id="pomodoro-display" style="display:none;">
+      <div class="pomo-timer-large" id="pomo-time">25:00</div>
+      <div class="pomo-mode-text" id="pomo-mode">MAG-ARAL KA NA!</div>
+      
+      <div class="pomo-actions">
+        <button id="start" class="pomo-btn pomo-btn-start" title="Start">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+        </button>
+        <button id="pause" class="pomo-btn pomo-btn-pause" disabled title="Pause">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+        <button id="reset" class="pomo-btn pomo-btn-reset" title="Reset">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Menu Button -->
+<button class="menu-btn" id="menu-btn" aria-label="Menu">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="1"></circle>
+    <circle cx="12" cy="5" r="1"></circle>
+    <circle cx="12" cy="19" r="1"></circle>
+  </svg>
+</button>
+
+<!-- Menu Panel -->
+<div class="menu-panel" id="menu-panel">
+  <div class="menu-header">
+    <h3>Settings</h3>
+    <button class="menu-close" id="menu-close" aria-label="Close">&times;</button>
+  </div>
+
+  <div class="menu-content">
+    <!-- Mode Toggle -->
+    <div class="menu-section">
+      <label class="toggle-label">
+        <span>Pomodoro Mode</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="mode-toggle">
+          <span class="toggle-slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Pomodoro Settings (only visible when toggle is off) -->
+    <div class="menu-section" id="pomo-settings">
+      <h4>Pomodoro Settings</h4>
+      
+      <div class="preset-row">
+        <button data-work="25" data-break="5" class="preset active">25/5</button>
+        <button data-work="50" data-break="10" class="preset">50/10</button>
+        <button data-work="15" data-break="3" class="preset">15/3</button>
+        <button data-work="5" data-break="2" class="preset">Quick 5</button>
+      </div>
+
+      <div class="input-row">
+        <label>Work (min)</label>
+        <input id="work-input" type="number" min="1" max="180" value="25">
+      </div>
+
+      <div class="input-row">
+        <label>Break (min)</label>
+        <input id="break-input" type="number" min="1" max="60" value="5">
+      </div>
+
+      <div class="menu-hint">
+        Timer auto switches between Work and Break modes.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
